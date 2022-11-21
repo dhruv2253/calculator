@@ -9,7 +9,7 @@ function operate(operator, a, b){
         return add(a,b);
     else if (operator === '-')
         return subtract(a,b);
-    else if (operator === '*')
+    else if (operator === 'x')
         return multiply(a,b);
     else if (operator === '/')
         return divide(a,b);
@@ -18,14 +18,20 @@ function operate(operator, a, b){
 }
 
 const numButtons = document.querySelectorAll('.num');
+const operationButtons = document.querySelectorAll('.operation');
 let currentDisplay = document.querySelector('.currentOperations');
 let previousDisplay = document.querySelector('.previousOperations');
 const clearButton = document.querySelector('.clear');
-let inputtedOperation;
-
+const equalButton = document.querySelector('.equal');
+let firstOperand;
+let secondOperand;
+let currentOperation;
 function clear() {
-    currentDisplay.textContent = "";
+    currentDisplay.textContent = "0";
     previousDisplay.textContent = "";
+    firstOperand = ''
+    secondOperand = ''
+    currentOperation = ''
 }
 
 //Clear Button function
@@ -36,8 +42,28 @@ clearButton.addEventListener('click', clear);
 numButtons.forEach(button => button.addEventListener('click', () => {
     currentDisplay = document.querySelector('.currentOperations')
     console.log(button.textContent)
-    inputtedOperation = currentDisplay.textContent += button.textContent
+    currentDisplay.textContent += button.textContent
+
 }));
 
 
 
+operationButtons.forEach((button) => button.addEventListener('click', () => setOperation(button.textContent)));
+
+equalButton.addEventListener('click', eval);
+ 
+function eval() {
+    if (currentOperation === null) return
+    secondOperand = currentDisplay.textContent;
+    currentDisplay.textContent = operate(currentOperation, parseInt(firstOperand), parseInt(secondOperand));
+    previousDisplay.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`
+    currentOperation = null;
+}
+
+function setOperation(operator) {
+    if (currentOperation === null) return
+    firstOperand = currentDisplay.textContent;
+    currentOperation = operator;
+    previousDisplay.textContent = `${firstOperand} ${currentOperation}`;
+    currentDisplay.textContent = "";
+}

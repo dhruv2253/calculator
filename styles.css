@@ -18,6 +18,10 @@
    
 }
 
+.previousOperations {
+    color: blue;
+}
+
 .previousOperations, .currentOperations {
    text-align: right;
    
