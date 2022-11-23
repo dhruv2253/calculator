@@ -7,6 +7,7 @@
     font-size: 48px;
 }
 
+
 .container {
     display: flex;
     justify-content: center;
@@ -15,6 +16,9 @@
 .display {
     display: flex;
     flex-direction: column;
+    background-color: grey;
+    min-height: 100px;
+    padding: 10px;
    
 }
 
@@ -24,7 +28,6 @@
 
 .previousOperations, .currentOperations {
    text-align: right;
-   
 }
 
 
@@ -54,3 +57,4 @@
     width: 125px;
     font-size: 32px;
 }
+
